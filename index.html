@@ -13,10 +13,10 @@ body{
     background:black;
     font-family:'Rubik', sans-serif;
     color:white;
-    overflow-y:auto;
+    overflow-x:hidden;
 }
 
-/* CENTER CONTAINER */
+/* CONTAINER */
 .container{
     width:100%;
     display:flex;
@@ -28,8 +28,8 @@ body{
 
 /* CARD */
 .card{
-    width:900px;
-    height:220px;
+    width: min(900px, 95vw);
+    min-height: 220px;
 
     display:flex;
     border-radius:18px;
@@ -44,8 +44,7 @@ body{
 /* LEFT VIDEO */
 .left{
     width:35%;
-    height:100%;
-    position:relative;
+    min-height:220px;
 }
 
 .left iframe{
@@ -57,7 +56,7 @@ body{
 /* RIGHT IMAGE */
 .right{
     width:65%;
-    position:relative;
+    min-height:220px;
 }
 
 .right img{
@@ -66,19 +65,7 @@ body{
     object-fit:cover;
 }
 
-/* TEXT TOP */
-.top{
-    position:absolute;
-    top:10px;
-    left:10px;
-    right:10px;
-
-    display:flex;
-    justify-content:space-between;
-    font-weight:800;
-}
-
-/* LEFT TEXT */
+/* INFO */
 .info{
     position:absolute;
     top:10px;
@@ -120,6 +107,42 @@ body{
     color:white;
 }
 
+/* 📱 MOBILE FIX */
+@media (max-width: 768px){
+
+    .card{
+        flex-direction:column;
+    }
+
+    .left,
+    .right{
+        width:100%;
+        height:200px;
+    }
+
+    .info{
+        position:relative;
+        top:auto;
+        left:auto;
+        padding:10px;
+    }
+
+    .chance{
+        position:relative;
+        top:auto;
+        right:auto;
+        padding:10px;
+    }
+
+    .wr{
+        position:relative;
+        bottom:auto;
+        right:auto;
+        margin:10px;
+        display:inline-block;
+    }
+}
+
 </style>
 </head>
 
@@ -130,40 +153,58 @@ body{
 <script>
 
 fetch("levels.json")
-.then(r=>r.json())
-.then(data=>{
+.then(r => r.json())
+.then(data => {
 
     const container = document.getElementById("container");
 
-    data.sort((a,b)=>a.place-b.place);
+    data.sort((a,b) => a.place - b.place);
 
-    data.forEach(l=>{
+    data.forEach(l => {
 
         const card = document.createElement("div");
         card.className = "card";
 
-        card.innerHTML = `
-        
-        <div class="left">
-            <iframe src="https://www.youtube.com/embed/${l.youtube}" allowfullscreen></iframe>
-        </div>
+        const left = document.createElement("div");
+        left.className = "left";
 
-        <div class="right">
-            <img src="${l.gif}">
-        </div>
+        const iframe = document.createElement("iframe");
+        iframe.src = `https://www.youtube.com/embed/${l.youtube}`;
+        iframe.allowFullscreen = true;
 
-        <div class="info">
+        left.appendChild(iframe);
+
+        const right = document.createElement("div");
+        right.className = "right";
+
+        const img = document.createElement("img");
+        img.src = l.gif;
+        img.loading = "lazy";
+
+        right.appendChild(img);
+
+        const info = document.createElement("div");
+        info.className = "info";
+        info.innerHTML = `
             <div class="title">#${l.place} ${l.name}</div>
             <div class="sub">by ${l.author} • id:${l.id}</div>
-        </div>
-
-        <div class="chance">${l.chance}</div>
-
-        <a class="wr" href="${l.wrLink}" target="_blank">
-            ${l.wrName}
-        </a>
-
         `;
+
+        const chance = document.createElement("div");
+        chance.className = "chance";
+        chance.textContent = l.chance;
+
+        const wr = document.createElement("a");
+        wr.className = "wr";
+        wr.href = l.wrLink;
+        wr.target = "_blank";
+        wr.textContent = l.wrName;
+
+        card.appendChild(left);
+        card.appendChild(right);
+        card.appendChild(info);
+        card.appendChild(chance);
+        card.appendChild(wr);
 
         container.appendChild(card);
 
