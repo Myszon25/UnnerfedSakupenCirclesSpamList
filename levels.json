@@ -59,6 +59,54 @@
     "wrLink": "https://youtube.com/watch?v=example2"
   },
 
+   {
+    "place": 7,
+    "name": "Unnamed 999",
+    "author": "Pepsi",
+    "id": "143695798",
+    "chance": "1/100^32",
+    "youtube": "baDUxw-W2211221`1`133232323232323Wo",
+    "gif": "https://media.giphy.com/media/xT9IgG5232320Fb7Mi0prBC/giphy.gif",
+    "wrName": "WR (none)",
+    "wrLink": "https://youtube.com/watch?v=example2"
+  },
+  
+   {
+    "place": 8,
+    "name": "Bloom",
+    "author": "MahloXC",
+    "id": "137918608",
+    "chance": "1/2^2^6",
+    "youtube": "baDUxw-W2211221`1`133232323232323Wo",
+    "gif": "https://media.giphy.com/media/xT9IgG5232320Fb7Mi0prBC/giphy.gif",
+    "wrName": "WR (none)",
+    "wrLink": "https://youtube.com/watch?v=example2"
+  },
+
+    {
+    "place": 10,
+    "name": "Death Unit",
+    "author": "Myszon12",
+    "id": "141376540",
+    "chance": "1/10000",
+    "youtube": "baDUxw-W2211221`1`133232323232323Wo",
+    "gif": "https://media.giphy.com/media/xT9IgG5232320Fb7Mi0prBC/giphy.gif",
+    "wrName": "WR (none)",
+    "wrLink": "https://youtube.com/watch?v=example2"
+  },
+
+    {
+    "place": 9,
+    "name": "Stereo Madness 2",
+    "author": "randomuserthat",
+    "id": ":141528058",
+    "chance": "1/10^10",
+    "youtube": "baDUxw-W2211221`1`133232323232323Wo",
+    "gif": "https://media.giphy.com/media/xT9IgG5232320Fb7Mi0prBC/giphy.gif",
+    "wrName": "WR (none)",
+    "wrLink": "https://youtube.com/watch?v=example2"
+  }
+
   {
     "place": 6,
     "name": "4x10 10 114",
