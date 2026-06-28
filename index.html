@@ -49,8 +49,6 @@
         --wr-hover-color: black;
         --play-overlay: rgba(0, 0, 0, 0.4);
         --play-overlay-hover: rgba(0, 0, 0, 0.1);
-        
-        --fav-active: #ff4d4d;
     }
 
     [data-theme="light"] {
@@ -91,8 +89,6 @@
         --wr-hover-color: white;
         --play-overlay: rgba(255, 255, 255, 0.2);
         --play-overlay-hover: rgba(255, 255, 255, 0);
-        
-        --fav-active: #ff3333;
     }
 
     /* PREMIUM SCROLLBAR */
@@ -154,17 +150,12 @@
     .filter-btn { padding: 8px 16px; border-radius: 100px; font-size: 12px; font-weight: 700; text-transform: uppercase; background: var(--input-bg); border: 1px solid var(--glass-border); color: var(--text-muted); cursor: pointer; transition: all 0.3s; white-space: nowrap; }
     .filter-btn:hover { background: var(--id-hover); color: var(--text-main); transform: translateY(-1px); }
     .filter-btn.active { background: var(--text-main); color: var(--bg-color); border-color: var(--text-main); box-shadow: 0 5px 15px rgba(255,255,255,0.1); }
-    
-    /* Favorite Heart */
-    .fav-btn { cursor: pointer; font-size: 18px; color: var(--glass-border-hover); transition: all 0.3s; background: none; border: none; outline: none; padding: 0; }
-    .fav-btn:hover { transform: scale(1.2); }
-    .fav-btn.is-fav { color: var(--fav-active); text-shadow: 0 0 15px rgba(255, 77, 77, 0.5); }
 
     /* ===================== */
     /* ELEGANT CARD LAYOUT   */
     /* ===================== */
     #levelsContainer { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 25px; perspective: 1000px; }
-    .card { width: min(920px, 95vw); height: 240px; display: flex; border-radius: 26px; overflow: hidden; background: var(--card-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); box-shadow: 0 20px 45px var(--shadow-dark); position: relative; opacity: 0; transform: translateY(40px); transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.3s ease; transform-style: preserve-3d; }
+    .card { width: min(920px, 95vw); height: 240px; display: flex; border-radius: 26px; overflow: hidden; background: var(--card-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); box-shadow: 0 20px 45px var(--shadow-dark); position: relative; opacity: 0; transform: translateY(35px); transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.3s ease, opacity 0.5s ease; transform-style: preserve-3d; }
     @keyframes cardEnter { to { opacity: 1; transform: translateY(0); } }
     .card:hover { border-color: var(--glass-border-hover); box-shadow: 0 30px 60px var(--shadow-hover), 0 0 40px rgba(155, 123, 255, 0.15); z-index: 10; }
     .left { width: 40%; height: 100%; position: relative; cursor: pointer; background: #000; overflow: hidden; flex-shrink: 0; }
@@ -176,7 +167,7 @@
     
     .play-overlay { position: absolute; inset: 0; background: var(--play-overlay); display: flex; justify-content: center; align-items: center; transition: background 0.3s; }
     .left:hover .play-overlay { background: var(--play-overlay-hover); }
-    .play-btn { width: 56px; height: 56px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255,255,255,0.4); backdrop-filter: blur(12px); border-radius: 50%; display: flex; justify-content: center; align-items: center; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none; }
+    .play-btn { width: 56px; height: 56px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255,255,255,0.4); backdrop-filter: blur(12px); border-radius: 50%; display: flex; justify-content: center; align-items: center; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
     .play-btn::after { content: ''; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 16px solid white; margin-left: 5px; }
     .left:hover .play-btn { transform: scale(1.15); background: white; box-shadow: 0 0 30px rgba(255,255,255,0.6); }
     .left:hover .play-btn::after { border-left-color: black; }
@@ -184,8 +175,7 @@
     .ui-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
     .title-wrapper { display: flex; align-items: center; gap: 12px; }
     .rank-badge { background: var(--rank-badge-bg); border: 1px solid var(--glass-border); color: var(--accent-1); padding: 4px 12px; border-radius: 10px; font-weight: 900; font-size: 15px; transition: background 0.5s; }
-    .title { font-size: 26px; font-weight: 900; letter-spacing: -0.5px; text-shadow: 0 2px 10px var(--text-shadow); transition: text-shadow 0.5s; cursor: pointer; }
-    .title:hover { color: var(--accent-1); }
+    .title { font-size: 26px; font-weight: 900; letter-spacing: -0.5px; text-shadow: 0 2px 10px var(--text-shadow); transition: text-shadow 0.5s; }
     .sub { font-size: 14px; color: var(--text-muted); margin-top: 8px; font-weight: 500; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; transition: color 0.5s;}
     .sub b { color: var(--text-main); transition: color 0.5s; }
     .id-copy { cursor: pointer; padding: 2px 6px; border-radius: 6px; background: var(--id-bg); border: 1px solid var(--glass-border); transition: all 0.2s; display: inline-flex; align-items: center; gap: 4px; color: var(--text-main); }
@@ -263,7 +253,7 @@
     }
 
     /* SKELETON LOADER */
-    .skeleton-card { width: min(920px, 95vw); height: 240px; border-radius: 26px; background: var(--skeleton-base); border: 1px solid var(--glass-border); position: relative; overflow: hidden; margin-bottom: 25px; }
+    .skeleton-card { width: min(920px, 95vw); height: 240px; border-radius: 26px; background: var(--skeleton-base); border: 1px solid var(--glass-border); position: relative; overflow: hidden; }
     .skeleton-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, var(--skeleton-shine), transparent); transform: translateX(-100%); animation: shimmer 1.5s infinite; opacity: 0.3; }
     @keyframes shimmer { 100% { transform: translateX(100%); } }
 
@@ -305,12 +295,14 @@
 
 <body>
 
+<!-- UI OVERLAYS -->
 <div id="scrollProgress"></div>
 <div class="ambient-bg"></div>
 <div class="cursor-glow" id="cursorGlow"></div>
 <div class="toast-container" id="toastBox"></div>
 <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Scroll to top">↑</button>
 
+<!-- LEVEL INFO MODAL -->
 <div id="levelModal" class="modal-overlay" onclick="if(event.target === this) closeModal()">
     <div class="modal-content">
         <div class="modal-header">
@@ -322,7 +314,8 @@
         </div>
         
         <div class="modal-video-container" id="mVideoContainer">
-            </div>
+            <!-- Iframe injected here via JS -->
+        </div>
 
         <div class="modal-body">
             <div class="modal-stats-grid">
@@ -364,10 +357,11 @@
     </div>
 </div>
 
+<!-- NAVIGATION -->
 <div class="navbar">
     <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Luck Based List</div>
     <div class="right-nav">
-        <input type="text" id="searchBar" placeholder="Search (Press /)">
+        <input type="text" id="searchBar" placeholder="Search levels...">
         <select id="sortSelect" class="sort-dropdown">
             <option value="place">Sort: Placement</option>
             <option value="chance">Sort: Lowest Chance</option>
@@ -382,6 +376,7 @@
     </div>
 </div>
 
+<!-- MAIN DASHBOARD -->
 <div class="container">
     <div class="stats-panel">
         <div class="stat-box">
@@ -394,25 +389,18 @@
         </div>
     </div>
 
+    <!-- DYNAMIC FILTER BAR -->
     <div class="filter-wrapper" id="filterWrapper"></div>
 
+    <!-- CARDS RENDER AREA -->
     <div id="levelsContainer"></div>
     <div id="emptyState" class="empty-state">No matches recorded for your specific parameters.</div>
 </div>
 
 <script>
-// --- DUMMY DATA ---
-// Added tags array, desc, video ID, and stats for the modal 
-const dummyData = [
-    { id: "98765432", place: 1, name: "Astral Luck", author: "SpaceBoy", verifier: "ProGamer", chance: "0.0001%", length: "Long", objects: "80,000", tags: ["Extreme", "Verified", "Frame Perfect"], video: "dQw4w9WgXcQ", desc: "One of the most incredibly difficult luck-based levels ever created. Requires near-perfect RNG." },
-    { id: "12345678", place: 2, name: "Casino Madness", author: "GambleDev", verifier: "None", chance: "0.005%", length: "Medium", objects: "45,000", tags: ["Unverified", "RNG Heavy"], video: "dQw4w9WgXcQ", desc: "A chaotic level built entirely around dice-roll mechanics." },
-    { id: "11223344", place: 3, name: "The Lottery", author: "Luckster", verifier: "LuckyGuy", chance: "0.02%", length: "Short", objects: "15,000", tags: ["Verified", "Short"], video: "dQw4w9WgXcQ", desc: "Very short, but requires hitting a 1-in-5000 trigger." }
-];
-
 // --- STATE MANAGEMENT ---
 let levelsData = [];
 let currentTagFilter = 'All';
-let favorites = JSON.parse(localStorage.getItem('luck_favorites')) || []; 
 
 // --- THEME ENGINE ---
 const themeToggle = document.getElementById('themeToggle');
@@ -444,17 +432,6 @@ window.addEventListener('scroll', () => {
     if (scrollTop > 400) { backToTopBtn.classList.add('visible'); } else { backToTopBtn.classList.remove('visible'); }
 });
 
-// --- KEYBOARD SHORTCUTS (Power User) ---
-document.addEventListener('keydown', (e) => {
-    if (e.key === '/' && document.activeElement.id !== 'searchBar') {
-        e.preventDefault(); 
-        document.getElementById('searchBar').focus();
-    }
-    if (e.key === 'Escape') {
-        closeModal();
-    }
-});
-
 // --- TOAST SYSTEM ---
 const toastBox = document.getElementById('toastBox');
 window.showToast = function(message) {
@@ -471,32 +448,13 @@ window.copyData = function(text, type) {
     navigator.clipboard.writeText(text).then(() => showToast(`Copied ${type}!`)).catch(err => console.error('Copy failed', err));
 }
 
-// Favorites Toggle
-window.toggleFavorite = function(id, btnElement) {
-    id = String(id);
-    const index = favorites.indexOf(id);
-    if (index > -1) {
-        favorites.splice(index, 1);
-        btnElement.classList.remove('is-fav');
-        btnElement.innerHTML = '♡';
-        showToast("Removed from Favorites");
-    } else {
-        favorites.push(id);
-        btnElement.classList.add('is-fav');
-        btnElement.innerHTML = '♥';
-        showToast("Added to Favorites");
-    }
-    localStorage.setItem('luck_favorites', JSON.stringify(favorites));
-    
-    // If currently viewing favorites, we might need to re-render
-    if (currentTagFilter === 'Favorites') {
-        renderLevels();
-    }
-}
+window.playVideo = function(element, videoId) {
+    element.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    element.style.cursor = 'default';
+};
 
-// --- MODAL ENGINE (Completed) ---
+// --- MODAL ENGINE (NEW) ---
 const modal = document.getElementById('levelModal');
-let currentShareUrl = "";
 
 window.openModal = function(id) {
     const level = levelsData.find(l => String(l.id) === String(id));
@@ -506,24 +464,20 @@ window.openModal = function(id) {
     document.getElementById('mRank').innerText = `#${level.place}`;
     document.getElementById('mTitle').innerText = level.name;
     document.getElementById('mAuthor').innerText = level.author;
-    document.getElementById('mVerifier').innerText = level.verifier || 'Unknown';
-    
-    // Resume where prompt cut off
-    document.getElementById('mID').innerHTML = `${level.id} 📋`;
+    document.getElementById('mVerifier').innerText = level.verifier || level.wrName || 'Unknown';
+    document.getElementById('mID').innerHTML = `${level.id} <span style="font-size: 14px">📋</span>`;
     document.getElementById('mChance').innerText = level.chance;
-    document.getElementById('mLength').innerText = level.length || '-';
-    document.getElementById('mObjects').innerText = level.objects || '-';
-    document.getElementById('mDesc').innerText = level.desc || 'No description provided for this level.';
+    document.getElementById('mLength').innerText = level.length || 'Unknown';
+    document.getElementById('mObjects').innerText = level.objects || 'Unknown';
+    document.getElementById('mDesc').innerText = level.description || `An extremely difficult luck-based challenge by ${level.author}. With a ${level.chance} success rate, it stands at #${level.place} on the list.`;
     
-    // Inject video
-    document.getElementById('mVideoContainer').innerHTML = `<iframe src="https://www.youtube.com/embed/${level.video}?autoplay=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    document.getElementById('mWRBtn').href = level.wrLink;
+    document.getElementById('mShareBtn').onclick = () => copyData(`Check out ${level.name} (#${level.place})! ID: ${level.id}`, 'Share Text');
 
-    // Share logic
-    currentShareUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?search=${encodeURIComponent(level.name)}`;
-    document.getElementById('mShareBtn').onclick = function() {
-        copyData(currentShareUrl, "Link");
-    };
+    // Setup Video Embed (Autoplays inside modal)
+    document.getElementById('mVideoContainer').innerHTML = `<iframe src="https://www.youtube.com/embed/${level.youtube}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
 
+    // Show modal & lock scroll
     modal.classList.add('active');
     document.body.classList.add('modal-open');
 }
@@ -531,158 +485,154 @@ window.openModal = function(id) {
 window.closeModal = function() {
     modal.classList.remove('active');
     document.body.classList.remove('modal-open');
-    // Destroy iframe to stop video playing in background
+    // Clear iframe to stop video playing in background
     setTimeout(() => { document.getElementById('mVideoContainer').innerHTML = ''; }, 400);
 }
 
-// --- RENDERING & FILTERING ENGINE ---
-function generateFilters() {
-    const wrapper = document.getElementById('filterWrapper');
-    let allTags = new Set();
-    levelsData.forEach(lvl => lvl.tags && lvl.tags.forEach(t => allTags.add(t)));
-    
-    let html = `<button class="filter-btn active" onclick="setFilter('All', this)">All</button>`;
-    html += `<button class="filter-btn" onclick="setFilter('Favorites', this)">♥ Favorites</button>`;
-    
-    allTags.forEach(tag => {
-        html += `<button class="filter-btn" onclick="setFilter('${tag}', this)">${tag}</button>`;
+// --- DATA PIPELINE ---
+const levelsContainer = document.getElementById("levelsContainer");
+const searchBar = document.getElementById("searchBar");
+const sortSelect = document.getElementById("sortSelect");
+const emptyState = document.getElementById("emptyState");
+const filterWrapper = document.getElementById("filterWrapper");
+
+function extractAndRenderTags(data) {
+    let tags = new Set(['All']);
+    data.forEach(l => l.tags?.forEach(t => tags.add(t)));
+    filterWrapper.innerHTML = '';
+    tags.forEach(tag => {
+        let btn = document.createElement('button');
+        btn.className = `filter-btn ${tag === currentTagFilter ? 'active' : ''}`;
+        btn.innerText = tag;
+        btn.onclick = () => { currentTagFilter = tag; extractAndRenderTags(data); processPipeline(); };
+        filterWrapper.appendChild(btn);
     });
-    wrapper.innerHTML = html;
 }
 
-window.setFilter = function(tag, btn) {
-    currentTagFilter = tag;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderLevels();
+function runStatisticsCompute(data) {
+    if(data.length === 0) return;
+    document.getElementById("statTotal").innerText = data.length;
+    let hardest = data.reduce((min, l) => l.place < min.place ? l : min, data[0]);
+    document.getElementById("statHardest").innerText = hardest ? `#${hardest.place} ${hardest.name}` : "-";
 }
 
-// Intersection Observer for staggered entrance (Visual Wow Factor)
-const cardObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animation = `cardEnter 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards`;
-            observer.unobserve(entry.target); 
-        }
-    });
-}, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-
-function renderLevels() {
-    const container = document.getElementById('levelsContainer');
-    const emptyState = document.getElementById('emptyState');
-    const searchTerm = document.getElementById('searchBar').value.toLowerCase();
-    const sortVal = document.getElementById('sortSelect').value;
-
-    container.innerHTML = '';
-
-    // 1. Filter
-    let filtered = levelsData.filter(lvl => {
-        const matchesSearch = lvl.name.toLowerCase().includes(searchTerm) || String(lvl.id).includes(searchTerm);
-        const matchesTag = currentTagFilter === 'All' 
-                           || (currentTagFilter === 'Favorites' && favorites.includes(String(lvl.id)))
-                           || (lvl.tags && lvl.tags.includes(currentTagFilter));
-        return matchesSearch && matchesTag;
-    });
-
-    // 2. Sort
-    filtered.sort((a, b) => {
-        if (sortVal === 'place') return a.place - b.place;
-        if (sortVal === 'alpha') return a.name.localeCompare(b.name);
-        if (sortVal === 'chance') return parseFloat(a.chance) - parseFloat(b.chance);
-        return 0;
-    });
-
-    if (filtered.length === 0) {
-        emptyState.style.display = 'block';
-    } else {
-        emptyState.style.display = 'none';
-        
-        filtered.forEach((lvl, index) => {
-            const isFav = favorites.includes(String(lvl.id));
-            let tagsHtml = lvl.tags ? lvl.tags.map(t => `<span class="tag ${t === 'Verified' ? 'cyan' : ''}">${t}</span>`).join('') : '';
-
-            // Using placeholder image for now
-            const card = document.createElement('div');
-            card.className = 'card';
-            // Start transparent for observer
-            card.style.opacity = '0'; 
-            
-            card.innerHTML = `
-                <div class="left" onclick="openModal('${lvl.id}')">
-                    <img src="https://img.youtube.com/vi/${lvl.video}/maxresdefault.jpg" alt="${lvl.name}" loading="lazy">
-                    <div class="play-overlay"><div class="play-btn"></div></div>
-                </div>
-                <div class="right">
-                    <div class="card-ui-layer">
-                        <div class="ui-top">
-                            <div>
-                                <div class="title-wrapper">
-                                    <div class="rank-badge">#${lvl.place}</div>
-                                    <div class="title" onclick="openModal('${lvl.id}')">${lvl.name}</div>
-                                    <button class="fav-btn ${isFav ? 'is-fav' : ''}" onclick="toggleFavorite('${lvl.id}', this)" title="Toggle Favorite">${isFav ? '♥' : '♡'}</button>
-                                </div>
-                                <div class="sub">
-                                    By <b>${lvl.author}</b> • Verified by <b>${lvl.verifier}</b>
-                                </div>
-                                <div class="tags-container">
-                                    ${tagsHtml}
-                                </div>
-                            </div>
-                            <div class="chance">${lvl.chance}</div>
-                        </div>
-                        <div class="ui-bottom">
-                            <div class="action-btn id-copy" onclick="copyData('${lvl.id}', 'ID')">${lvl.id} 📋</div>
-                            <button class="action-btn icon-only" onclick="openModal('${lvl.id}')">ℹ️ Info</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-            container.appendChild(card);
-            cardObserver.observe(card); // Attach observer
+function applyTiltEffect() {
+    if(window.innerWidth <= 900) return; 
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+            const centerX = rect.width / 2; const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -4; 
+            const rotateY = ((x - centerX) / centerX) * 4;
+            card.style.transform = `perspective(1000px) translateY(-5px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
+        card.addEventListener('mouseleave', () => { card.style.transform = `perspective(1000px) translateY(0) rotateX(0deg) rotateY(0deg)`; });
+    });
+}
+
+function render(data) {
+    levelsContainer.innerHTML = "";
+    if(data.length === 0) { emptyState.style.display = "block"; return; }
+    emptyState.style.display = "none";
+
+    data.forEach((l, index) => {
+        let card = document.createElement("div");
+        card.className = "card";
+        card.style.animation = `cardEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards ${index * 0.08}s`;
+
+        let tagsHTML = "";
+        if (l.tags && l.tags.length > 0) {
+            tagsHTML = `<div class="tags-container">` + l.tags.map(t => `<div class="tag ${t === 'Verified' ? 'cyan' : ''}">${t}</div>`).join('') + `</div>`;
+        }
+
+        card.innerHTML = `
+        <div class="left" onclick="playVideo(this, '${l.youtube}')">
+            <img src="https://img.youtube.com/vi/${l.youtube}/hqdefault.jpg" alt="Thumbnail" loading="lazy">
+            <div class="play-overlay"><div class="play-btn"></div></div>
+        </div>
+        <div class="right">
+            <img src="${l.gif}" alt="Loop" style="position:absolute; inset:0; z-index:1;" loading="lazy">
+            <div class="card-ui-layer">
+                <div class="ui-top">
+                    <div class="text-group">
+                        <div class="title-wrapper">
+                            <div class="rank-badge">#${l.place}</div>
+                            <div class="title">${l.name}</div>
+                        </div>
+                        <div class="sub">
+                            Creator: <b>${l.author}</b> • ID: 
+                            <span class="id-copy" onclick="copyData('${l.id}', 'ID')">${l.id} 📋</span>
+                        </div>
+                        ${tagsHTML}
+                    </div>
+                    <div class="chance">${l.chance}</div>
+                </div>
+                <div class="ui-bottom">
+                    <!-- NEW INFO BUTTON ADDED HERE -->
+                    <button class="action-btn icon-only" onclick="openModal('${l.id}')" aria-label="Detailed Info">👁️ Info</button>
+                    <button class="action-btn icon-only" onclick="copyData('Check out ${l.name} (#${l.place})! ID: ${l.id}', 'Info')" aria-label="Share">🔗</button>
+                    <a class="action-btn" href="${l.wrLink}" target="_blank">🏆 ${l.wrName}</a>
+                </div>
+            </div>
+        </div>
+        `;
+        levelsContainer.appendChild(card);
+    });
+    applyTiltEffect();
+}
+
+function renderSkeletons() {
+    levelsContainer.innerHTML = "";
+    emptyState.style.display = "none";
+    for(let i=0; i<3; i++) {
+        let skel = document.createElement('div');
+        skel.className = 'skeleton-card';
+        levelsContainer.appendChild(skel);
     }
 }
 
-// --- INITIALIZATION ---
-function init() {
-    // Show Skeletons first
-    const container = document.getElementById('levelsContainer');
-    container.innerHTML = `<div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div>`;
-    
-    // Simulate Data Fetch
-    setTimeout(() => {
-        levelsData = dummyData; // In a real app, fetch() goes here
-        
-        document.getElementById('statTotal').innerText = levelsData.length;
-        document.getElementById('statHardest').innerText = levelsData[0]?.name || '-';
-        
-        generateFilters();
+function processPipeline() {
+    let query = searchBar.value.toLowerCase();
+    let sortOption = sortSelect.value;
+    let filtered = levelsData.filter(l => {
+        let matchesSearch = l.name.toLowerCase().includes(query) || l.author.toLowerCase().includes(query) || String(l.id).includes(query);
+        let matchesTag = currentTagFilter === 'All' || (l.tags && l.tags.includes(currentTagFilter));
+        return matchesSearch && matchesTag;
+    });
 
-        // Shareable Links check on load
-        const urlParams = new URLSearchParams(window.location.search);
-        if(urlParams.has('search')) {
-            document.getElementById('searchBar').value = urlParams.get('search');
-        }
+    if(sortOption === "place") { filtered.sort((a,b) => a.place - b.place); } 
+    else if (sortOption === "chance") { filtered.sort((a,b) => parseFloat(a.chance) - parseFloat(b.chance)); } 
+    else if (sortOption === "alpha") { filtered.sort((a,b) => a.name.localeCompare(b.name)); }
 
-        renderLevels();
-    }, 600); // 600ms delay to show off the skeleton loaders
+    renderSkeletons();
+    setTimeout(() => { render(filtered); }, 400); 
 }
 
-// Event Listeners for searching & sorting
-document.getElementById('searchBar').addEventListener('input', (e) => {
-    // Update URL dynamically for shareable links
-    const val = e.target.value;
-    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + (val ? `?search=${encodeURIComponent(val)}` : '');
-    window.history.replaceState({path: newUrl}, '', newUrl);
-    
-    renderLevels();
+// --- INITIALIZATION ---
+// Added expanded extended data fields (description, length, objects, verifier) to demo payload
+const demoData = [
+    { place: 1, name: "VSC", author: "BoBoBo", verifier: "Paqeo", id: "666666", chance: "0.001%", tags: ["Extreme", "Timings", "Short"], youtube: "dQw4w9WgXcQ", gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3VwY2NmdXJvYmdkMDNnbW96ZHZ0b3E0bWN6ZnA1bWxpY3p6bXF6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7Tov7edZ6tTuOg8w/giphy.gif", wrLink: "#", wrName: "Paqeo", length: "0m 18s", objects: "14,500", description: "VSC stands as a monument to timing perfection. It requires inhuman consistency over a highly condensed period of time. This level pushed the absolute limits of verification when it was first introduced." },
+    { place: 2, name: "Tartarus", author: "Riot & More", verifier: "Dolphy", id: "123456", chance: "0.052%", tags: ["Verified", "Frame Perfect"], youtube: "dQw4w9WgXcQ", gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2VwYm81b3ZkM3JicnpqNDVhcWpxZnNwbTVvNXZpdXp0cHhrNDRxbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0HlHFRbmaZtBRhXG/giphy.gif", wrLink: "#", wrName: "Mefewe", length: "1m 58s", objects: "32,109", description: "Once the unquestioned hardest level in the game, Tartarus features incredibly tight straight flying and brutal ship control. A true legendary extreme demon." },
+    { place: 3, name: "Acheron", author: "Zoink", verifier: "Zoink", id: "987654", chance: "0.089%", tags: ["Extreme", "Verified"], youtube: "dQw4w9WgXcQ", gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3VwY2NmdXJvYmdkMDNnbW96ZHZ0b3E0bWN6ZnA1bWxpY3p6bXF6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7Tov7edZ6tTuOg8w/giphy.gif", wrLink: "#", wrName: "Zoink", length: "2m 14s", objects: "44,992", description: "An evolution of the top 1 formula, Acheron features nearly frame-perfect inputs back to back for over two minutes, draining the stamina of even the best players." }
+];
+
+fetch("levels.json").then(r => r.json()).then(data => {
+    levelsData = data; runStatisticsCompute(levelsData); extractAndRenderTags(levelsData); processPipeline();
+}).catch(() => {
+    console.warn("levels.json not found, using demo data.");
+    levelsData = demoData; runStatisticsCompute(levelsData); extractAndRenderTags(levelsData); processPipeline();
 });
 
-document.getElementById('sortSelect').addEventListener('change', renderLevels);
-
-// Start
-init();
-
+// Event Listeners
+searchBar.addEventListener("input", processPipeline);
+sortSelect.addEventListener("change", processPipeline);
+// Escape key closes modal
+document.addEventListener('keydown', (e) => {
+    if(e.key === "Escape" && modal.classList.contains('active')) closeModal();
+});
 </script>
+
 </body>
 </html>
