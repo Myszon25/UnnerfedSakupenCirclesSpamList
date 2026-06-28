@@ -37,13 +37,28 @@
     .ambient-bg {
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
-        z-index: -1;
+        z-index: -2;
         background: 
             radial-gradient(circle at 15% 25%, rgba(255, 77, 255, 0.07) 0%, transparent 45%),
             radial-gradient(circle at 85% 75%, rgba(0, 212, 255, 0.07) 0%, transparent 45%),
             radial-gradient(circle at 50% 50%, rgba(155, 123, 255, 0.04) 0%, transparent 60%);
         filter: blur(30px);
         animation: drift 20s ease-in-out infinite alternate;
+    }
+
+    /* DYNAMIC CURSOR GLOW */
+    .cursor-glow {
+        position: fixed;
+        top: -150px;
+        left: -150px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(155, 123, 255, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: -1;
+        transition: transform 0.15s ease-out;
+        will-change: transform;
     }
 
     @keyframes drift {
@@ -73,7 +88,7 @@
         padding: 0 30px;
         border-radius: 100px;
 
-        background: rgba(8, 8, 12, 0.5);
+        background: rgba(8, 8, 12, 0.6);
         backdrop-filter: blur(30px);
         -webkit-backdrop-filter: blur(30px);
         
@@ -213,6 +228,11 @@
         border-radius: 20px;
         padding: 18px 24px;
         backdrop-filter: blur(10px);
+        transition: border-color 0.3s;
+    }
+
+    .stat-box:hover {
+        border-color: rgba(255, 255, 255, 0.15);
     }
 
     .stat-label { font-size: 11px; text-transform: uppercase; color: #888; font-weight: 700; letter-spacing: 1px; }
@@ -274,7 +294,6 @@
 
     .right { width: 60%; height: 100%; position: relative; overflow: hidden; }
     
-    /* Elegant Content Overlay Engine inside Right Partition */
     .card-ui-layer {
         position: absolute;
         inset: 0;
@@ -335,8 +354,48 @@
     }
     
     .title { font-size: 26px; font-weight: 900; letter-spacing: -0.5px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-    .sub { font-size: 14px; color: #b3b3b3; margin-top: 6px; font-weight: 500; }
+    
+    .sub { font-size: 14px; color: #b3b3b3; margin-top: 8px; font-weight: 500; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .sub b { color: #fff; }
+
+    .id-copy {
+        cursor: pointer;
+        padding: 2px 6px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+    .id-copy:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+    }
+
+    .tags-container {
+        display: flex;
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+    .tag {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 3px 8px;
+        border-radius: 6px;
+        background: rgba(155, 123, 255, 0.1);
+        color: var(--accent-1);
+        border: 1px solid rgba(155, 123, 255, 0.2);
+    }
+
+    .tag.cyan {
+        background: rgba(0, 212, 255, 0.1);
+        color: var(--accent-2);
+        border-color: rgba(0, 212, 255, 0.2);
+    }
     
     .chance {
         font-weight: 900; font-size: 22px;
@@ -364,6 +423,38 @@
         box-shadow: 0 10px 20px rgba(255,255,255,0.2);
     }
 
+    /* TOAST NOTIFICATION SYSTEM */
+    .toast-container {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 1000;
+    }
+
+    .toast {
+        background: rgba(20, 20, 30, 0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--accent-1);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 600;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        transform: translateX(120%);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .toast.show {
+        transform: translateX(0);
+    }
+
     .empty-state {
         text-align: center; padding: 50px; 
         border: 1px dashed rgba(255,255,255,0.1); border-radius: 20px;
@@ -389,27 +480,19 @@
         .stats-panel { gap: 12px; width: 94%; }
         .stat-value { font-size: 18px; }
 
-        /* Structural Unwrapping: Swapping absolute metrics to native structural layouts */
-        .card { 
-            flex-direction: column; 
-            height: auto; 
-            width: 94vw;
-            border-radius: 20px;
-        }
+        .card { flex-direction: column; height: auto; width: 94vw; border-radius: 20px; }
         .left { width: 100%; height: 190px; }
         .right { width: 100%; height: auto; }
         
         .card-ui-layer {
-            position: relative; /* Returns block flow control */
-            padding: 20px;
-            background: #09090e;
-            gap: 20px;
+            position: relative; padding: 20px; background: #09090e; gap: 20px;
         }
         
         .ui-top { flex-direction: column; gap: 12px; }
         .chance { align-self: flex-start; font-size: 20px; }
         .ui-bottom { width: 100%; }
         .wr { width: 100%; justify-content: center; box-sizing: border-box; }
+        .cursor-glow { display: none; } /* Disable cursor glow on mobile */
     }
 
     @keyframes moveGradient {
@@ -422,6 +505,9 @@
 <body>
 
 <div class="ambient-bg"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<div class="toast-container" id="toastBox"></div>
 
 <div class="navbar">
     <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
@@ -462,6 +548,41 @@
 </div>
 
 <script>
+// Ambient Glow Logic
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', (e) => {
+    // Uses requestAnimationFrame natively via transition for buttery smoothness
+    glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+});
+
+// Toast Notification System
+const toastBox = document.getElementById('toastBox');
+window.showToast = function(message) {
+    let toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `<span>✨</span> ${message}`;
+    toastBox.appendChild(toast);
+    
+    // Trigger animation
+    setTimeout(() => toast.classList.add('show'), 10);
+    
+    // Remove after 3s
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 400); // Wait for transition out
+    }, 3000);
+}
+
+// Copy ID Function
+window.copyID = function(id) {
+    navigator.clipboard.writeText(id).then(() => {
+        showToast(`Copied ID: ${id}`);
+    }).catch(err => {
+        console.error('Failed to copy', err);
+    });
+}
+
+// Level Mechanics
 let container = document.getElementById("container");
 let searchBar = document.getElementById("searchBar");
 let sortSelect = document.getElementById("sortSelect");
@@ -503,6 +624,14 @@ function render(data){
         card.className = "card";
         card.style.animation = `cardEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards ${index * 0.06}s`;
 
+        // Generate dynamic HTML tags if they exist in the JSON
+        let tagsHTML = "";
+        if (l.tags && l.tags.length > 0) {
+            tagsHTML = `<div class="tags-container">` + 
+                l.tags.map(t => `<div class="tag ${t === 'Verified' ? 'cyan' : ''}">${t}</div>`).join('') 
+                + `</div>`;
+        }
+
         card.innerHTML = `
         <div class="left" onclick="playVideo(this, '${l.youtube}')">
             <img src="https://img.youtube.com/vi/${l.youtube}/hqdefault.jpg" alt="Thumbnail">
@@ -517,7 +646,13 @@ function render(data){
                             <div class="rank-badge">#${l.place}</div>
                             <div class="title">${l.name}</div>
                         </div>
-                        <div class="sub">Creator: <b>${l.author}</b> • ID: ${l.id}</div>
+                        <div class="sub">
+                            Creator: <b>${l.author}</b> • ID: 
+                            <span class="id-copy" onclick="copyID('${l.id}')">
+                                ${l.id} <span style="font-size: 12px">📋</span>
+                            </span>
+                        </div>
+                        ${tagsHTML}
                     </div>
                     <div class="chance">${l.chance}</div>
                 </div>
@@ -561,10 +696,10 @@ fetch("levels.json")
     processPipeline();
 })
 .catch(() => {
-    // Interactive development fallback engine content
+    // Interactive development fallback engine content with added Tag mechanic
     levelsData = [
-        { place: 1, name: "VSC", author: "BoBoBo", id: "666666", chance: "0.001%", youtube: "dQw4w9WgXcQ", gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3VwY2NmdXJvYmdkMDNnbW96ZHZ0b3E0bWN6ZnA1bWxpY3p6bXF6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7Tov7edZ6tTuOg8w/giphy.gif", wrLink: "#", wrName: "Paqeo" },
-        { place: 2, name: "Tartarus", author: "Riot", id: "123456", chance: "0.052%", youtube: "dQw4w9WgXcQ", gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2VwYm81b3ZkM3JicnpqNDVhcWpxZnNwbTVvNXZpdXp0cHhrNDRxbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0HlHFRbmaZtBRhXG/giphy.gif", wrLink: "#", wrName: "Mefewe" }
+        { place: 1, name: "VSC", author: "BoBoBo", id: "666666", chance: "0.001%", tags: ["Extreme", "Timings"], youtube: "dQw4w9WgXcQ", gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3VwY2NmdXJvYmdkMDNnbW96ZHZ0b3E0bWN6ZnA1bWxpY3p6bXF6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7Tov7edZ6tTuOg8w/giphy.gif", wrLink: "#", wrName: "Paqeo" },
+        { place: 2, name: "Tartarus", author: "Riot", id: "123456", chance: "0.052%", tags: ["Verified", "Frame Perfect"], youtube: "dQw4w9WgXcQ", gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2VwYm81b3ZkM3JicnpqNDVhcWpxZnNwbTVvNXZpdXp0cHhrNDRxbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0HlHFRbmaZtBRhXG/giphy.gif", wrLink: "#", wrName: "Mefewe" }
     ];
     runStatisticsCompute(levelsData);
     processPipeline();
